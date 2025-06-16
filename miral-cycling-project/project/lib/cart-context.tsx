@@ -7,6 +7,8 @@ interface CartItem {
   name: string;
   price: number;
   size: string;
+  gender?: string;
+  color?: string;
   quantity: number;
   image: string;
 }
@@ -33,13 +35,20 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case 'ADD_ITEM': {
       const existingItem = state.items.find(
-        item => item.id === action.payload.id && item.size === action.payload.size
+        item =>
+          item.id === action.payload.id &&
+          item.size === action.payload.size &&
+          item.gender === action.payload.gender &&
+          item.color === action.payload.color
       );
 
       let newItems;
       if (existingItem) {
         newItems = state.items.map(item =>
-          item.id === action.payload.id && item.size === action.payload.size
+          item.id === action.payload.id &&
+            item.size === action.payload.size &&
+            item.gender === action.payload.gender &&
+            item.color === action.payload.color
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );

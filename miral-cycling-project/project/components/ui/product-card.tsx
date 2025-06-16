@@ -108,6 +108,8 @@ export function ProductCard({ product, index }: ProductCardProps) {
                   name: product.name,
                   price: product.price,
                   size: product.sizes[0],
+                  gender: product.genders ? product.genders[0] : product.gender,
+                  color: product.colors ? product.colors[0].name : undefined,
                   image: product.images[0],
                 },
               });

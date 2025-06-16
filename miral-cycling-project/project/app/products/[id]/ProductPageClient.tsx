@@ -25,6 +25,8 @@ export default function ProductPage({ params }: ProductPageProps) {
   const product = SAMPLE_PRODUCTS.find(p => p.id === params.id);
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedGender, setSelectedGender] = useState(product?.genders?.[0] || 'Male');
+  const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || null);
   const { dispatch } = useCart();
   const { state: favoritesState, dispatch: favoritesDispatch } = useFavorites();
   const { t } = useLanguage();
@@ -54,7 +56,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   const handleAddToCart = () => {
     if (!selectedSize) return;
-    
+
     dispatch({
       type: 'ADD_ITEM',
       payload: {
@@ -62,6 +64,8 @@ export default function ProductPage({ params }: ProductPageProps) {
         name: product.name,
         price: product.price,
         size: selectedSize,
+        gender: selectedGender,
+        color: selectedColor?.name,
         image: product.images[0]
       }
     });
@@ -164,6 +168,39 @@ export default function ProductPage({ params }: ProductPageProps) {
               <p className="text-gray-600 leading-relaxed mb-8">
                 {product.description}
               </p>
+
+              {product.genders && (
+                <div className="mb-6 space-y-2">
+                  <label className="block text-sm font-medium text-gray-900">Genre</label>
+                  <div className="flex gap-2">
+                    {product.genders.map(g => (
+                      <button
+                        key={g}
+                        onClick={() => setSelectedGender(g)}
+                        className={`px-3 py-1 rounded-md border text-sm ${selectedGender === g ? 'bg-black text-white' : 'bg-white text-gray-700'}`}
+                      >
+                        {g}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {product.colors && (
+                <div className="mb-6 space-y-2">
+                  <label className="block text-sm font-medium text-gray-900">Couleur</label>
+                  <div className="flex gap-2">
+                    {product.colors.map((c, idx) => (
+                      <button
+                        key={c.name}
+                        onClick={() => setSelectedColor(c)}
+                        className={`w-8 h-8 rounded-full border-2 ${selectedColor?.name === c.name ? 'border-black' : 'border-gray-300'}`}
+                        style={{ backgroundColor: c.hex }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Size Selection */}
               <div className="space-y-4 mb-8">
