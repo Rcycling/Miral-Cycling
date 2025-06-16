@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Heart, ShoppingBag } from 'lucide-react';
 import { Product } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
@@ -14,6 +15,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, index }: ProductCardProps) {
+  const router = useRouter();
   const getCollectionBadge = (collection: string) => {
     const badges = {
       aero: { label: 'Aero', color: 'bg-black text-white' },
@@ -34,12 +36,19 @@ export function ProductCard({ product, index }: ProductCardProps) {
 
   const collectionBadge = getCollectionBadge(product.collection);
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('a,button')) return;
+    router.push(`/products/${product.id}`);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+      onClick={handleCardClick}
+      className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
     >
       {/* Product Image */}
       <div className="relative aspect-square bg-gray-100 overflow-hidden">
@@ -52,9 +61,11 @@ export function ProductCard({ product, index }: ProductCardProps) {
         
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
-          <Badge className={collectionBadge.color}>
-            {collectionBadge.label}
-          </Badge>
+          <Link href={`/products/${product.id}`}> 
+            <Badge className={collectionBadge.color}>
+              {collectionBadge.label}
+            </Badge>
+          </Link>
           {product.isNew && (
             <Badge className="bg-green-600 text-white">
               Nouveau
