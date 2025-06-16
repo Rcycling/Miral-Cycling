@@ -45,6 +45,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
       className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
     >
       {/* Product Image */}

@@ -58,7 +58,11 @@ export function HeroSection() {
               </Button>
             </Link>
             <Link href="/about">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white bg-transparent hover:bg-white hover:text-black px-8"
+              >
                 Découvrir MIRAL
               </Button>
             </Link>
