@@ -28,9 +28,11 @@ export function FeaturedProducts() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="flex overflow-x-auto gap-8 mb-12 pb-4">
           {featuredProducts.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
+            <div key={product.id} className="w-72 flex-shrink-0">
+              <ProductCard product={product} index={index} />
+            </div>
           ))}
         </div>
 
