@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useFavorites } from '@/lib/favorites-context';
 import { motion } from 'framer-motion';
 import { User, Package, Heart, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -33,20 +34,8 @@ export default function AccountPage() {
     }
   ]);
 
-  const [favorites] = useState([
-    {
-      id: 'terra-shield-jersey',
-      name: 'TerraShield Jersey',
-      price: 125,
-      image: 'https://images.pexels.com/photos/6386955/pexels-photo-6386955.jpeg?auto=compress&cs=tinysrgb&w=400'
-    },
-    {
-      id: 'flow-fit-bib-men',
-      name: 'FlowFit Bib Homme',
-      price: 130,
-      image: 'https://images.pexels.com/photos/6386951/pexels-photo-6386951.jpeg?auto=compress&cs=tinysrgb&w=400'
-    }
-  ]);
+  const { state: favoritesState, dispatch: favoritesDispatch } = useFavorites();
+  const favorites = favoritesState.items;
 
   return (
     <div className="pt-16">
@@ -239,6 +228,9 @@ export default function AccountPage() {
               >
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Mes favoris</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {favorites.length === 0 && (
+                    <p className="col-span-full text-gray-600">Aucun favori pour l'instant.</p>
+                  )}
                   {favorites.map((item) => (
                     <div key={item.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                       <img
@@ -253,8 +245,12 @@ export default function AccountPage() {
                           <Button size="sm" className="flex-1 bg-black text-white hover:bg-gray-800">
                             Ajouter au panier
                           </Button>
-                          <Button variant="outline" size="sm">
-                            <Heart className="w-4 h-4 fill-current" />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => favoritesDispatch({ type: 'REMOVE', payload: item.id })}
+                          >
+                            <Heart className="w-4 h-4 fill-red-500 text-red-500" />
                           </Button>
                         </div>
                       </div>
