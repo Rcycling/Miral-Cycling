@@ -1,6 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useFavorites } from '@/lib/favorites-context';
+import { useUser, type User as UserInfo } from '@/lib/user-context';
 import { motion } from 'framer-motion';
 import { User, Package, Heart, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,12 +12,19 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function AccountPage() {
-  const [user, setUser] = useState({
-    firstName: 'Thomas',
-    lastName: 'Laurent',
-    email: 'thomas@example.com',
-    phone: '+33 6 12 34 56 78'
+  const { user, setUser } = useUser();
+  const router = useRouter();
+  const [userState, setUserState] = useState<UserInfo>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    phone: ''
   });
+
+  useEffect(() => {
+    if (user) setUserState(user);
+  }, [user]);
 
   const [orders] = useState([
     {
@@ -33,20 +43,8 @@ export default function AccountPage() {
     }
   ]);
 
-  const [favorites] = useState([
-    {
-      id: 'terra-shield-jersey',
-      name: 'TerraShield Jersey',
-      price: 125,
-      image: 'https://images.pexels.com/photos/6386955/pexels-photo-6386955.jpeg?auto=compress&cs=tinysrgb&w=400'
-    },
-    {
-      id: 'flow-fit-bib-men',
-      name: 'FlowFit Bib Homme',
-      price: 130,
-      image: 'https://images.pexels.com/photos/6386951/pexels-photo-6386951.jpeg?auto=compress&cs=tinysrgb&w=400'
-    }
-  ]);
+  const { state: favoritesState, dispatch: favoritesDispatch } = useFavorites();
+  const favorites = favoritesState.items;
 
   return (
     <div className="pt-16">
@@ -108,8 +106,8 @@ export default function AccountPage() {
                         <Label htmlFor="firstName">Prénom</Label>
                         <Input
                           id="firstName"
-                          value={user.firstName}
-                          onChange={(e) => setUser({...user, firstName: e.target.value})}
+                          value={userState.firstName}
+                          onChange={(e) => setUserState({ ...userState, firstName: e.target.value })}
                           className="mt-1"
                         />
                       </div>
@@ -117,8 +115,8 @@ export default function AccountPage() {
                         <Label htmlFor="lastName">Nom</Label>
                         <Input
                           id="lastName"
-                          value={user.lastName}
-                          onChange={(e) => setUser({...user, lastName: e.target.value})}
+                          value={userState.lastName}
+                          onChange={(e) => setUserState({ ...userState, lastName: e.target.value })}
                           className="mt-1"
                         />
                       </div>
@@ -127,8 +125,8 @@ export default function AccountPage() {
                         <Input
                           id="email"
                           type="email"
-                          value={user.email}
-                          onChange={(e) => setUser({...user, email: e.target.value})}
+                          value={userState.email}
+                          onChange={(e) => setUserState({ ...userState, email: e.target.value })}
                           className="mt-1"
                         />
                       </div>
@@ -136,14 +134,17 @@ export default function AccountPage() {
                         <Label htmlFor="phone">Téléphone</Label>
                         <Input
                           id="phone"
-                          value={user.phone}
-                          onChange={(e) => setUser({...user, phone: e.target.value})}
+                          value={userState.phone}
+                          onChange={(e) => setUserState({ ...userState, phone: e.target.value })}
                           className="mt-1"
                         />
                       </div>
                     </div>
                     <div className="mt-6">
-                      <Button className="bg-black text-white hover:bg-gray-800">
+                      <Button
+                        className="bg-black text-white hover:bg-gray-800"
+                        onClick={() => setUser(userState)}
+                      >
                         Sauvegarder les modifications
                       </Button>
                     </div>
@@ -239,6 +240,9 @@ export default function AccountPage() {
               >
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Mes favoris</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {favorites.length === 0 && (
+                    <p className="col-span-full text-gray-600">Aucun favori pour l'instant.</p>
+                  )}
                   {favorites.map((item) => (
                     <div key={item.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                       <img
@@ -253,8 +257,12 @@ export default function AccountPage() {
                           <Button size="sm" className="flex-1 bg-black text-white hover:bg-gray-800">
                             Ajouter au panier
                           </Button>
-                          <Button variant="outline" size="sm">
-                            <Heart className="w-4 h-4 fill-current" />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => favoritesDispatch({ type: 'REMOVE', payload: item.id })}
+                          >
+                            <Heart className="w-4 h-4 fill-red-500 text-red-500" />
                           </Button>
                         </div>
                       </div>
@@ -320,7 +328,14 @@ export default function AccountPage() {
                 </div>
 
                 <div className="flex justify-end">
-                  <Button variant="outline" className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    className="flex items-center gap-2"
+                    onClick={() => {
+                      setUser(null);
+                      router.push('/signup');
+                    }}
+                  >
                     <LogOut className="w-4 h-4" />
                     Se déconnecter
                   </Button>
