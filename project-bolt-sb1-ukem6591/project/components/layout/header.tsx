@@ -7,11 +7,13 @@ import { Menu, X, ShoppingBag, User } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/language-context';
+import { useUser } from '@/lib/user-context';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { state } = useCart();
   const { t, lang, setLang } = useLanguage();
+  const { user } = useUser();
 
   const navigation = [
     { name: t.home, href: '/' },
@@ -52,9 +54,11 @@ export function Header() {
 
           {/* Right side icons */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="hidden md:flex">
-              <User className="w-5 h-5" />
-            </Button>
+            <Link href={user ? '/account' : '/signup'}>
+              <Button variant="ghost" size="sm" className="hidden md:flex">
+                <User className="w-5 h-5" />
+              </Button>
+            </Link>
             
             <Link href="/cart" className="relative">
               <Button variant="ghost" size="sm">
@@ -101,7 +105,7 @@ export function Header() {
                 </Link>
               ))}
               <Link
-                href="/account"
+                href={user ? '/account' : '/signup'}
                 className="block text-gray-700 hover:text-black transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
