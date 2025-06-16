@@ -8,7 +8,7 @@ import { ProductCard } from '@/components/ui/product-card';
 import { Button } from '@/components/ui/button';
 
 export function FeaturedProducts() {
-  const featuredProducts = SAMPLE_PRODUCTS.filter(product => product.isFeatured).slice(0, 4);
+  const featuredProducts = SAMPLE_PRODUCTS.filter(product => product.isFeatured).slice(0, 8);
 
   return (
     <section className="py-20 bg-gray-50">
