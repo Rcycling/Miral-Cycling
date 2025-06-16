@@ -19,8 +19,8 @@ interface CartState {
 
 type CartAction =
   | { type: 'ADD_ITEM'; payload: Omit<CartItem, 'quantity'> }
-  | { type: 'REMOVE_ITEM'; payload: string }
-  | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
+  | { type: 'REMOVE_ITEM'; payload: { id: string; size: string } }
+  | { type: 'UPDATE_QUANTITY'; payload: { id: string; size: string; quantity: number } }
   | { type: 'CLEAR_CART' };
 
 const initialState: CartState = {
@@ -54,7 +54,9 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     }
 
     case 'REMOVE_ITEM': {
-      const newItems = state.items.filter(item => item.id !== action.payload);
+      const newItems = state.items.filter(
+        item => !(item.id === action.payload.id && item.size === action.payload.size)
+      );
       const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
       const itemCount = newItems.reduce((count, item) => count + item.quantity, 0);
 
@@ -62,11 +64,13 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     }
 
     case 'UPDATE_QUANTITY': {
-      const newItems = state.items.map(item =>
-        item.id === action.payload.id
-          ? { ...item, quantity: Math.max(0, action.payload.quantity) }
-          : item
-      ).filter(item => item.quantity > 0);
+      const newItems = state.items
+        .map(item =>
+          item.id === action.payload.id && item.size === action.payload.size
+            ? { ...item, quantity: Math.max(0, action.payload.quantity) }
+            : item
+        )
+        .filter(item => item.quantity > 0);
 
       const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
       const itemCount = newItems.reduce((count, item) => count + item.quantity, 0);

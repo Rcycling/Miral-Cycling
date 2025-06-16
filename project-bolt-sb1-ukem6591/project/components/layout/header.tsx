@@ -56,14 +56,16 @@ export function Header() {
               <User className="w-5 h-5" />
             </Button>
             
-            <Button variant="ghost" size="sm" className="relative">
-              <ShoppingBag className="w-5 h-5" />
-              {state.itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {state.itemCount}
-                </span>
-              )}
-            </Button>
+            <Link href="/cart" className="relative">
+              <Button variant="ghost" size="sm">
+                <ShoppingBag className="w-5 h-5" />
+                {state.itemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {state.itemCount}
+                  </span>
+                )}
+              </Button>
+            </Link>
 
             {/* Mobile menu button */}
             <Button
@@ -104,6 +106,13 @@ export function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t.account}
+              </Link>
+              <Link
+                href="/cart"
+                className="block text-gray-700 hover:text-black transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t.cart}
               </Link>
               <select
                 value={lang}
