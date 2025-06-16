@@ -4,6 +4,24 @@ export const PRODUCT_COLLECTIONS = {
   terra: 'MIRAL Terra'
 } as const;
 
+export const COLLECTION_COLORS: Record<string, ColorOption[]> = {
+  aero: [
+    { name: 'Deep Black', hex: '#1A1A1A', image: '' },
+    { name: 'Carmine Red', hex: '#8B0000', image: '' },
+    { name: 'Graphite', hex: '#2F2F2F', image: '' }
+  ],
+  flow: [
+    { name: 'Mineral Blue', hex: '#3A5A80', image: '' },
+    { name: 'Sage Green', hex: '#8DAA91', image: '' },
+    { name: 'Ash White', hex: '#F2F2F2', image: '' }
+  ],
+  terra: [
+    { name: 'Earth Clay', hex: '#B25C3C', image: '' },
+    { name: 'Olive Green', hex: '#708238', image: '' },
+    { name: 'Sand Beige', hex: '#D8CAB8', image: '' }
+  ]
+};
+
 export const PRODUCT_CATEGORIES = {
   jerseys: 'Maillots',
   shorts: 'Cuissards',
@@ -26,6 +44,12 @@ export const PRODUCT_TYPES = {
   'accessoire': 'Accessoire'
 } as const;
 
+export interface ColorOption {
+  name: string;
+  hex: string;
+  image: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -36,6 +60,8 @@ export interface Product {
   price: number;
   originalPrice?: number;
   images: string[];
+  colors?: ColorOption[];
+  genders?: string[];
   description: string;
   features: string[];
   sizes: string[];
@@ -58,6 +84,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
       'https://images.pexels.com/photos/6386956/pexels-photo-6386956.jpeg?auto=compress&cs=tinysrgb&w=800',
       'https://images.pexels.com/photos/6386942/pexels-photo-6386942.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.aero,
+    genders: ['Male', 'Female'],
     description: 'Coupe aérodynamique, tissu compressif, mesh sous les bras, zip invisible. Conçu pour la performance pure.',
     features: [
       'Tissu compressif haute performance',
@@ -82,6 +110,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     images: [
       'https://images.pexels.com/photos/6386958/pexels-photo-6386958.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.aero,
+    genders: ['Male', 'Female'],
     description: 'Parfait pour l\'été ou home trainer, léger, respirant. Performance maximale par temps chaud.',
     features: [
       'Ultra-léger et respirant',
@@ -105,6 +135,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     images: [
       'https://images.pexels.com/photos/6386937/pexels-photo-6386937.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.aero,
+    genders: ['Male', 'Female'],
     description: 'Peau haute densité, coutures plates, bretelles en mesh. Le summum du confort pour la compétition.',
     features: [
       'Peau de chamois haute densité',
@@ -130,6 +162,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     images: [
       'https://images.pexels.com/photos/6386944/pexels-photo-6386944.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.flow,
+    genders: ['Male', 'Female'],
     description: 'Confort respirant, tissu doux, poche triple, bande silicone. Idéal pour les longues sorties.',
     features: [
       'Tissu doux et respirant',
@@ -152,6 +186,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     images: [
       'https://images.pexels.com/photos/6386948/pexels-photo-6386948.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.flow,
+    genders: ['Male', 'Female'],
     description: 'Confort respirant, tissu doux, poche triple, bande silicone. Coupe féminine ajustée.',
     features: [
       'Coupe féminine spécifique',
@@ -174,6 +210,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     images: [
       'https://images.pexels.com/photos/6386951/pexels-photo-6386951.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.flow,
+    genders: ['Male', 'Female'],
     description: 'Grand confort longue distance, tissu souple, bande large. Parfait pour l\'endurance.',
     features: [
       'Peau de chamois longue distance',
@@ -196,6 +234,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     images: [
       'https://images.pexels.com/photos/6386953/pexels-photo-6386953.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.flow,
+    genders: ['Male', 'Female'],
     description: 'Grand confort longue distance, tissu souple, bande large. Coupe féminine spécifique.',
     features: [
       'Peau de chamois féminine',
@@ -220,6 +260,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     images: [
       'https://images.pexels.com/photos/6386955/pexels-photo-6386955.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.terra,
+    genders: ['Male', 'Female'],
     description: 'Résistant au vent, manches longues, zip étanche, col renforcé. Conçu pour l\'exploration.',
     features: [
       'Tissu coupe-vent',
@@ -243,6 +285,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     images: [
       'https://images.pexels.com/photos/6386959/pexels-photo-6386959.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
+    colors: COLLECTION_COLORS.terra,
+    genders: ['Male', 'Female'],
     description: 'Tissu renforcé, poches latérales, grip cuisse solide. Résistance maximale pour le gravel.',
     features: [
       'Tissu renforcé anti-abrasion',
