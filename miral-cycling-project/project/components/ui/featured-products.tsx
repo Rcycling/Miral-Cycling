@@ -28,12 +28,28 @@ export function FeaturedProducts() {
           </p>
         </motion.div>
 
-        <div className="flex overflow-x-auto gap-8 mb-12 pb-4">
-          {featuredProducts.map((product, index) => (
-            <div key={product.id} className="w-72 flex-shrink-0">
-              <ProductCard product={product} index={index} />
-            </div>
-          ))}
+        <div className="relative mb-12">
+          <button
+            type="button"
+            className="featured-scroll-left featured-nav-btn"
+            aria-label="Scroll left"
+          >
+            ‹
+          </button>
+          <div className="featured-scroll-container flex overflow-x-auto gap-8 pb-4">
+            {featuredProducts.map((product, index) => (
+              <div key={product.id} className="w-72 flex-shrink-0">
+                <ProductCard product={product} index={index} />
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="featured-scroll-right featured-nav-btn"
+            aria-label="Scroll right"
+          >
+            ›
+          </button>
         </div>
 
         <motion.div

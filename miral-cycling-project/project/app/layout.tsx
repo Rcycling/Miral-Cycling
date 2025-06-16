@@ -19,6 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
+      <head>
+        <link rel="stylesheet" href="/miral-enhancements.css" />
+      </head>
       <body className={inter.className}>
         <Providers>
           <Header />
@@ -27,6 +30,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </Providers>
+        <script src="/miral-enhancements.js" defer></script>
       </body>
     </html>
   );
