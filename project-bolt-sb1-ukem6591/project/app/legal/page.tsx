@@ -93,7 +93,7 @@ export default function LegalPage() {
                 <div className="text-gray-600">
                   <p><strong>Hébergeur :</strong> Vercel Inc.</p>
                   <p><strong>Adresse :</strong> 340 S Lemon Ave #4133, Walnut, CA 91789, USA</p>
-                  <p><strong>Site web :</strong> <a href="https://vercel.com" className=\"text-black hover:underline">vercel.com</a></p>
+                  <p><strong>Site web :</strong> <a href="https://vercel.com" className="text-black hover:underline">vercel.com</a></p>
                 </div>
               </div>
             </div>
