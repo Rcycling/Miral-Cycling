@@ -7,6 +7,8 @@ import { SAMPLE_PRODUCTS, PRODUCT_COLLECTIONS, PRODUCT_CATEGORIES, GENDER_FILTER
 import { ProductCard } from '@/components/ui/product-card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Breadcrumbs } from '@/components/layout/breadcrumbs';
+import { useLanguage } from '@/lib/language-context';
 
 export default function CollectionsPage() {
   const searchParams = useSearchParams();
@@ -15,6 +17,7 @@ export default function CollectionsPage() {
   const [selectedGender, setSelectedGender] = useState(searchParams.get('gender') || 'all');
   const [selectedType, setSelectedType] = useState(searchParams.get('type') || 'all');
   const [sortBy, setSortBy] = useState('name');
+  const { t } = useLanguage();
 
   const filteredProducts = useMemo(() => {
     let products = [...SAMPLE_PRODUCTS];
@@ -112,6 +115,15 @@ export default function CollectionsPage() {
           </motion.div>
         </div>
       </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <Breadcrumbs
+          items={[
+            { label: t.home, href: '/' },
+            { label: t.collections },
+          ]}
+        />
+      </div>
 
       {/* Collection Filter */}
       <section className="py-6 bg-gray-50 border-b">
