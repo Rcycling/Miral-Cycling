@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Breadcrumbs } from '@/components/layout/breadcrumbs';
+import { useLanguage } from '@/lib/language-context';
 
 interface ProductPageProps {
   params: {
@@ -23,6 +25,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedImage, setSelectedImage] = useState(0);
   const { dispatch } = useCart();
+  const { t } = useLanguage();
 
   if (!product) {
     notFound();
@@ -45,6 +48,15 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className="pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <Breadcrumbs
+          items={[
+            { label: t.home, href: '/' },
+            { label: t.collections, href: '/collections' },
+            { label: product.name },
+          ]}
+        />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Product Images */}
