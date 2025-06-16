@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Breadcrumbs } from '@/components/layout/breadcrumbs';
 import { useLanguage } from '@/lib/language-context';
+import { ProductGallery } from '@/components/ui/product-gallery';
 
 interface ProductPageProps {
   params: {
@@ -24,7 +25,6 @@ interface ProductPageProps {
 export default function ProductPage({ params }: ProductPageProps) {
   const product = SAMPLE_PRODUCTS.find(p => p.id === params.id);
   const [selectedSize, setSelectedSize] = useState('');
-  const [selectedImage, setSelectedImage] = useState(0);
   const [selectedGender, setSelectedGender] = useState(product?.genders?.[0] || 'Male');
   const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || null);
   const { dispatch } = useCart();
@@ -86,43 +86,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Product Images */}
           <div className="space-y-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="aspect-square bg-gray-100 rounded-lg overflow-hidden"
-            >
-              <Image
-                src={product.images[selectedImage]}
-                alt={product.name}
-                width={600}
-                height={600}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-            
-            {/* Thumbnail Images */}
-            {product.images.length > 1 && (
-              <div className="flex gap-2">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
-                      selectedImage === index ? 'border-black' : 'border-transparent'
-                    }`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${product.name} ${index + 1}`}
-                      width={80}
-                      height={80}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
+            <ProductGallery images={product.images} />
           </div>
 
           {/* Product Info */}

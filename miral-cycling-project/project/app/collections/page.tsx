@@ -237,6 +237,14 @@ export default function CollectionsPage() {
                 {filteredProducts.map((product, index) => (
                   <ProductCard key={product.id} product={product} index={index} />
                 ))}
+                {Array.from({ length: Math.max(0, 8 - filteredProducts.length) }).map((_, i) => (
+                  <div
+                    key={`placeholder-${i}`}
+                    className="h-64 border-2 border-dashed rounded-lg flex items-center justify-center text-gray-400"
+                  >
+                    Bientôt disponible
+                  </div>
+                ))}
               </div>
             </>
           ) : (

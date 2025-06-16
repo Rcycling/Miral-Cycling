@@ -21,7 +21,7 @@ export function Header() {
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-black/90 text-white backdrop-blur-sm border-b border-gray-800 pr-[var(--removed-body-scroll-bar-size)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -35,7 +35,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-black transition-colors duration-200"
+                className="text-gray-200 hover:text-white transition-colors duration-200"
               >
                 {item.name}
               </Link>
@@ -43,7 +43,7 @@ export function Header() {
             <select
               value={lang}
               onChange={(e) => setLang(e.target.value as 'fr' | 'en')}
-              className="text-sm border border-gray-300 rounded-md bg-white px-2 py-1"
+              className="text-sm border border-gray-700 bg-black text-white rounded-md px-2 py-1"
             >
               <option value="fr">FR</option>
               <option value="en">EN</option>
@@ -89,14 +89,14 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-gray-100"
+            className="md:hidden bg-black border-b border-gray-800 text-white"
           >
             <div className="px-4 py-4 space-y-4">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block text-gray-700 hover:text-black transition-colors duration-200"
+                  className="block text-gray-200 hover:text-white transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -104,14 +104,14 @@ export function Header() {
               ))}
               <Link
                 href="/account"
-                className="block text-gray-700 hover:text-black transition-colors duration-200"
+                className="block text-gray-200 hover:text-white transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t.account}
               </Link>
               <Link
                 href="/cart"
-                className="block text-gray-700 hover:text-black transition-colors duration-200"
+                className="block text-gray-200 hover:text-white transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t.cart}
@@ -119,7 +119,7 @@ export function Header() {
               <select
                 value={lang}
                 onChange={(e) => setLang(e.target.value as 'fr' | 'en')}
-                className="mt-2 w-full border border-gray-300 rounded-md px-2 py-1"
+                className="mt-2 w-full border border-gray-700 bg-black text-white rounded-md px-2 py-1"
               >
                 <option value="fr">FR</option>
                 <option value="en">EN</option>
