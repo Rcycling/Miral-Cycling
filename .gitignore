@@ -1,2 +1,6 @@
 node_modules/
 project-bolt-sb1-ukem6591/project/tsconfig.tsbuildinfo
+
+# Next.js build outputs
+project-bolt-sb1-ukem6591/project/.next/
+project-bolt-sb1-ukem6591/project/out/
