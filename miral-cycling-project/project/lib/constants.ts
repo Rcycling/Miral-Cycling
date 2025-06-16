@@ -173,7 +173,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
       'Protection UV 30+'
     ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    inStock: true
+    inStock: true,
+    isFeatured: true
   },
   {
     id: 'flow-lite-jersey-women',
@@ -197,7 +198,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
       'Coutures plates'
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    inStock: true
+    inStock: true,
+    isFeatured: true
   },
   {
     id: 'flow-fit-bib-men',
@@ -221,7 +223,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
       'Compression douce'
     ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    inStock: true
+    inStock: true,
+    isFeatured: true
   },
   {
     id: 'flow-fit-bib-women',
@@ -245,7 +248,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
       'Compression douce'
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    inStock: true
+    inStock: true,
+    isFeatured: true
   },
 
   // MIRAL Terra Collection
@@ -272,7 +276,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     inStock: true,
-    isNew: true
+    isNew: true,
+    isFeatured: true
   },
   {
     id: 'terra-grip-bib',
