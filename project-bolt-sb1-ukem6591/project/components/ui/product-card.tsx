@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Heart, ShoppingBag } from 'lucide-react';
+import { useCart } from '@/lib/cart-context';
+import { useFavorites } from '@/lib/favorites-context';
 import { Product } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -14,6 +16,10 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, index }: ProductCardProps) {
+  const { dispatch } = useCart();
+  const { state: favoritesState, dispatch: favoritesDispatch } = useFavorites();
+  const isFavorite = favoritesState.items.some(item => item.id === product.id);
+
   const getCollectionBadge = (collection: string) => {
     const badges = {
       aero: { label: 'Aero', color: 'bg-black text-white' },
@@ -64,10 +70,48 @@ export function ProductCard({ product, index }: ProductCardProps) {
 
         {/* Quick Actions */}
         <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button size="sm" variant="outline" className="bg-white/90 backdrop-blur-sm">
-            <Heart className="w-4 h-4" />
+          <Button
+            size="sm"
+            variant="outline"
+            className="bg-white/90 backdrop-blur-sm"
+            onClick={(e) => {
+              e.preventDefault();
+              if (isFavorite) {
+                favoritesDispatch({ type: 'REMOVE', payload: product.id });
+              } else {
+                favoritesDispatch({
+                  type: 'ADD',
+                  payload: {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.images[0],
+                  },
+                });
+              }
+            }}
+          >
+            <Heart className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : ''}`} />
           </Button>
-          <Button size="sm" variant="outline" className="bg-white/90 backdrop-blur-sm">
+          <Button
+            size="sm"
+            variant="outline"
+            className="bg-white/90 backdrop-blur-sm"
+            onClick={(e) => {
+              e.preventDefault();
+              if (!product.inStock) return;
+              dispatch({
+                type: 'ADD_ITEM',
+                payload: {
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  size: product.sizes[0],
+                  image: product.images[0],
+                },
+              });
+            }}
+          >
             <ShoppingBag className="w-4 h-4" />
           </Button>
         </div>

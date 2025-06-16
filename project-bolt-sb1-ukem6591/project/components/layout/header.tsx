@@ -52,9 +52,11 @@ export function Header() {
 
           {/* Right side icons */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="hidden md:flex">
-              <User className="w-5 h-5" />
-            </Button>
+            <Link href="/account" className="hidden md:flex">
+              <Button variant="ghost" size="sm">
+                <User className="w-5 h-5" />
+              </Button>
+            </Link>
             
             <Link href="/cart" className="relative">
               <Button variant="ghost" size="sm">
