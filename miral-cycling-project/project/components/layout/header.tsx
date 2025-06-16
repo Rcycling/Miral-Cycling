@@ -30,29 +30,33 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-800 hover:text-black transition-colors duration-200"
+                className="text-gray-800 hover:text-black transition-colors duration-200 nav-link"
               >
                 {item.name}
               </Link>
             ))}
-            <select
-              value={lang}
-              onChange={(e) => setLang(e.target.value as 'fr' | 'en')}
-              className="text-sm border border-gray-300 bg-white text-black rounded-md px-2 py-1"
-            >
-              <option value="fr">FR</option>
-              <option value="en">EN</option>
-            </select>
           </nav>
 
           {/* Right side icons */}
           <div className="flex items-center space-x-4">
-            <Link href="/account" className="hidden md:flex">
+            <div className="language-wrapper ml-auto flex items-center">
+              <span className="mr-1">🌐</span>
+              <select
+                id="language-select"
+                value={lang}
+                onChange={(e) => setLang(e.target.value as 'fr' | 'en')}
+                className="text-sm border border-gray-300 bg-white text-black rounded-md px-2 py-1"
+              >
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+              </select>
+            </div>
+            <Link href="/account" className="hidden lg:flex">
               <Button variant="ghost" size="sm">
                 <User className="w-5 h-5" />
               </Button>
@@ -73,7 +77,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -89,7 +93,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-gray-200 text-black"
+            className="lg:hidden bg-white border-b border-gray-200 text-black"
           >
             <div className="px-4 py-4 space-y-4">
               {navigation.map((item) => (
@@ -116,14 +120,6 @@ export function Header() {
               >
                 {t.cart}
               </Link>
-              <select
-                value={lang}
-                onChange={(e) => setLang(e.target.value as 'fr' | 'en')}
-                className="mt-2 w-full border border-gray-300 bg-white text-black rounded-md px-2 py-1"
-              >
-                <option value="fr">FR</option>
-                <option value="en">EN</option>
-              </select>
             </div>
           </motion.div>
         )}
