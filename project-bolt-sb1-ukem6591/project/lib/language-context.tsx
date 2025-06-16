@@ -9,14 +9,16 @@ const translations = {
     collections: 'Collections',
     about: 'À propos',
     contact: 'Contact',
-    account: 'Mon compte'
+    account: 'Mon compte',
+    cart: 'Panier'
   },
   en: {
     home: 'Home',
     collections: 'Collections',
     about: 'About',
     contact: 'Contact',
-    account: 'Account'
+    account: 'Account',
+    cart: 'Cart'
   }
 };
 
