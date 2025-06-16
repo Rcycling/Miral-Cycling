@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { Heart, ShoppingBag, Check, Star } from 'lucide-react';
 import { SAMPLE_PRODUCTS } from '@/lib/constants';
 import { useCart } from '@/lib/cart-context';
+import { useFavorites } from '@/lib/favorites-context';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -25,7 +26,27 @@ export default function ProductPage({ params }: ProductPageProps) {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedImage, setSelectedImage] = useState(0);
   const { dispatch } = useCart();
+  const { state: favoritesState, dispatch: favoritesDispatch } = useFavorites();
   const { t } = useLanguage();
+
+  const isFavorite = favoritesState.items.some(item => item.id === product?.id);
+
+  const toggleFavorite = () => {
+    if (!product) return;
+    if (isFavorite) {
+      favoritesDispatch({ type: 'REMOVE', payload: product.id });
+    } else {
+      favoritesDispatch({
+        type: 'ADD',
+        payload: {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.images[0],
+        },
+      });
+    }
+  };
 
   if (!product) {
     notFound();
@@ -175,8 +196,15 @@ export default function ProductPage({ params }: ProductPageProps) {
                   {!product.inStock ? 'Rupture de stock' : 'Ajouter au panier'}
                 </Button>
                 
-                <Button variant="outline" size="lg" className="px-6">
-                  <Heart className="w-5 h-5" />
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-6"
+                  onClick={toggleFavorite}
+                >
+                  <Heart
+                    className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : ''}`}
+                  />
                 </Button>
               </div>
 
