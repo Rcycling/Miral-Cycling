@@ -6,16 +6,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ShoppingBag, User } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
 import { Button } from '@/components/ui/button';
-
-const navigation = [
-  { name: 'Collections', href: '/collections' },
-  { name: 'À propos', href: '/about' },
-  { name: 'Contact', href: '/contact' },
-];
+import { useLanguage } from '@/lib/language-context';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { state } = useCart();
+  const { t, lang, setLang } = useLanguage();
+
+  const navigation = [
+    { name: t.home, href: '/' },
+    { name: t.collections, href: '/collections' },
+    { name: t.about, href: '/about' },
+    { name: t.contact, href: '/contact' },
+  ];
 
   return (
     <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
@@ -37,6 +40,14 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
+            <select
+              value={lang}
+              onChange={(e) => setLang(e.target.value as 'fr' | 'en')}
+              className="text-sm border border-gray-300 rounded-md bg-white px-2 py-1"
+            >
+              <option value="fr">FR</option>
+              <option value="en">EN</option>
+            </select>
           </nav>
 
           {/* Right side icons */}
@@ -92,8 +103,16 @@ export function Header() {
                 className="block text-gray-700 hover:text-black transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Mon compte
+                {t.account}
               </Link>
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value as 'fr' | 'en')}
+                className="mt-2 w-full border border-gray-300 rounded-md px-2 py-1"
+              >
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+              </select>
             </div>
           </motion.div>
         )}
