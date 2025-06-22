@@ -74,25 +74,26 @@ export const SAMPLE_PRODUCTS: Product[] = [
   // MIRAL Aero Collection
   {
     id: 'aero-one-jersey',
-    name: 'AeroOne Jersey',
+    name: 'Aero Éclat - Jersey',
     collection: 'aero',
     category: 'jerseys',
     type: 'manches-courtes',
     gender: 'unisex',
-    price: 135,
+    price: 115,
     images: [
-      'https://images.pexels.com/photos/6386956/pexels-photo-6386956.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/6386942/pexels-photo-6386942.jpeg?auto=compress&cs=tinysrgb&w=800'
+      '',
+      ''
     ],
     colors: COLLECTION_COLORS.aero,
     genders: ['Male', 'Female'],
-    description: 'Coupe aérodynamique, tissu compressif, mesh sous les bras, zip invisible. Conçu pour la performance pure.',
-    features: [
-      'Tissu compressif haute performance',
-      'Mesh respirant sous les bras',
-      'Zip invisible YKK',
-      'Coupe aérodynamique',
-      'Bandes réfléchissantes'
+     description: 'Allie légèreté extrême et ventilation ciblée pour affronter les ascensions par fortes chaleurs. Son design épuré et sa coupe aérodynamique réduisent la traînée et optimisent vos performances sur le plat comme en côte.',
+  features: [
+    'Tissu ultraléger à fibres creuses',
+    'Panneaux en mesh 3D respirant',
+    'Coupe anatomique “second skin”',
+    'Coutures plates anti-irritation',
+    'Bord côte siliconé pour un maintien parfait'
+
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     inStock: true,
@@ -101,24 +102,25 @@ export const SAMPLE_PRODUCTS: Product[] = [
   },
   {
     id: 'aero-sleeveless',
-    name: 'AeroSleeveless',
+    name: 'Aero Solstice - Jersey',
     collection: 'aero',
     category: 'jerseys',
-    type: 'sans-manches',
+    type: 'manches-longues',
     gender: 'unisex',
-    price: 105,
+    price: 120,
     images: [
-      'https://images.pexels.com/photos/6386958/pexels-photo-6386958.jpeg?auto=compress&cs=tinysrgb&w=800'
+      ''
     ],
     colors: COLLECTION_COLORS.aero,
-    genders: ['Male', 'Female'],
-    description: 'Parfait pour l\'été ou home trainer, léger, respirant. Performance maximale par temps chaud.',
-    features: [
-      'Ultra-léger et respirant',
-      'Parfait pour l\'entraînement indoor',
-      'Séchage rapide',
-      'Coupe ergonomique',
-      'Tissu anti-odeur'
+genders: ['Male', 'Female'],
+description: 'Optimise l’équilibre parfait entre isolation et respirabilité lors des sorties mi-saison. Sa maille stretch double densité emprisonne la chaleur sans jamais surchauffer et offre un maintien sur mesure.',
+  features: [
+    'Maille stretch double densité',
+    'Finition intérieure brossée pour plus de douceur',
+    'Col montant réglable',
+    'Manches anatomiques ergonomiques',
+    'Fermeture zippée intégrale anti-courant d’air'
+
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     inStock: true,
@@ -126,30 +128,81 @@ export const SAMPLE_PRODUCTS: Product[] = [
   },
   {
     id: 'aero-pro-bib',
-    name: 'AeroPro Bib',
+    name: 'Aero Impulsion',
     collection: 'aero',
     category: 'shorts',
     type: 'bretelles',
     gender: 'unisex',
     price: 145,
     images: [
-      'https://images.pexels.com/photos/6386937/pexels-photo-6386937.jpeg?auto=compress&cs=tinysrgb&w=800'
+      ''
     ],
     colors: COLLECTION_COLORS.aero,
     genders: ['Male', 'Female'],
-    description: 'Peau haute densité, coutures plates, bretelles en mesh. Le summum du confort pour la compétition.',
-    features: [
-      'Peau de chamois haute densité',
-      'Coutures plates anti-frottement',
-      'Bretelles mesh respirantes',
-      'Compression graduée',
-      'Tissu compressif'
+    description: 'Allie maintien musculaire et légèreté pour vos sprints les plus intenses. Son chamois haute densité absorbe les vibrations tandis que les inserts siliconés garantissent un parfait maintien sans contrainte.',
+  features: [
+    'Chamois haute densité absorbant les vibrations',
+    'Coutures plates anti-frottement',
+    'Bretelles mesh respirantes',
+    'Compression graduée',
+    'Tissu compressif ultra-souple'
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     inStock: true,
     isFeatured: true
   },
-
+{
+    id: 'aero-zeub',
+    name: 'Aero Zenith',
+    collection: 'aero',
+    category: 'top',
+    type: 'sleeveless-jacket',
+    gender: 'unisex',
+    price: 95,
+    images: [
+      ''
+    ],
+    colors: COLLECTION_COLORS.aero,
+    genders: ['Male', 'Female'],
+    description: 'La mini-doudoune sans manches ultime, alliant isolation performante et compacité extrême. Son isolant ultra-compressible se range dans sa poche zippée tout en protégeant efficacement du froid.',
+  features: [
+    'Isolant ultra-compressible haute performance',
+    'Empiècements softshell extensibles',
+    'Packable dans sa poche zippée intégrée',
+    'Col montant matelassé pour un confort cervical optimal',
+    'Surface déperlante pour affronter l’humidité'
+    ],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    inStock: true,
+    isFeatured: true
+  
+  },
+{
+    id: 'aero-zeub2',
+    name: 'Aero Horizon',
+    collection: 'aero',
+    category: 'top',
+    type: 'long-bib',
+    gender: 'unisex',
+    price: 150,
+    images: [
+      ''
+    ],
+    colors: COLLECTION_COLORS.aero,
+    genders: ['Male', 'Female'],
+    description: 'Allie protection coupe-vent à respirabilité ciblée pour l’endurance par temps frais. Sa taille haute galbante et son empiècement ergonomique offrent un maintien sans point de pression.',
+  features: [
+    'Tissu thermique coupe-vent à l’avant',
+    'Maille arrière ultra-respirante',
+    'Taille haute galbante et confortable',
+    'Empiècements ergonomiques sur couture intérieure',
+    'Revêtement hydrophobe léger'
+    ],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    inStock: true,
+    isFeatured: true
+  
+  },
   // MIRAL Flow Collection
   {
     id: 'flow-lite-jersey-men',
