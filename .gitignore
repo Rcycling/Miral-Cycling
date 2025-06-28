@@ -4,3 +4,4 @@ miral-cycling-project/project/tsconfig.tsbuildinfo
 # Next.js build outputs
 miral-cycling-project/project/.next/
 miral-cycling-project/project/out/
+.env
